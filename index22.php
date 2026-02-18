@@ -2,28 +2,32 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Exercício 10 - Loja Mamão com Açúcar</title>
+    <title>Exercício 22 - -Análise de Produto </title>
 </head>
 <body>
 
     <form method="POST">
-        <label>Valor Total da Compra (R$):</label><br>
-        <input type="number" name="valor_total" required >
-        <br><br>
-
-        <input type="submit" value="Calcular Prestações">
+        Preço de Custo: <input type="number" name="custo" required><br><br>
+        Preço de Venda: <input type="number" name="venda" required><br><br>
+        <input type="submit" value="Verificar Margem">
     </form>
 
     <?php
 
-        $valor_total = $_POST['valor_total'];
+        $custo = floatval($_POST['custo']);
+        $venda = floatval($_POST['venda']);
 
-        $valor_prestacao = $valor_total / 5;
+        if ($venda > $custo) {
+            $status = "LUCRO";
+        } elseif ($venda < $custo) {
+            $status = "PREJUÍZO";
+        } else {
+            $status = "EMPATE";
+        }
 
-        echo "Valor total da compra: R$ " . $valor_total . "<br>";
-        echo "Você pagará em 5 prestações de R$ " . $valor_prestacao . "sem juros.";
-
+        echo "<h3>Resultado: $status</h3>";
+        echo "Diferença: R$ " . $venda - $custo;
+    
     ?>
-
 </body>
 </html>

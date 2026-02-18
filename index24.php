@@ -1,29 +1,25 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>Exercício 10 - Loja Mamão com Açúcar</title>
-</head>
+<head><meta charset="UTF-8"><title>Exercício 24</title></head>
 <body>
-
+    <h2>Análise de Valor (Natureza do Número)</h2>
     <form method="POST">
-        <label>Valor Total da Compra (R$):</label><br>
-        <input type="number" name="valor_total" required >
-        <br><br>
-
-        <input type="submit" value="Calcular Prestações">
+        Número: <input type="number" name="valor" required>
+        <input type="submit" value="Analisar">
     </form>
 
     <?php
+   
+        $valor = floatval($_POST['valor']);
 
-        $valor_total = $_POST['valor_total'];
-
-        $valor_prestacao = $valor_total / 5;
-
-        echo "Valor total da compra: R$ " . $valor_total . "<br>";
-        echo "Você pagará em 5 prestações de R$ " . $valor_prestacao . "sem juros.";
-
+        if ($valor > 0) {
+            echo "<h3>O número $valor é POSITIVO.</h3>";
+        } elseif ($valor < 0) {
+            echo "<h3>O número $valor é NEGATIVO.</h3>";
+        } else {
+            echo "<h3>O valor informado é ZERO.</h3>";
+        }
+    
     ?>
-
 </body>
 </html>

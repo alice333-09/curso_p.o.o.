@@ -2,28 +2,30 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Exercício 10 - Loja Mamão com Açúcar</title>
+    <title>Exercício 31 - Ordem Crescente</title>
 </head>
 <body>
 
     <form method="POST">
-        <label>Valor Total da Compra (R$):</label><br>
-        <input type="number" name="valor_total" required >
-        <br><br>
-
-        <input type="submit" value="Calcular Prestações">
+        Valor 1: <input type="number" name="n1" required><br><br>
+        Valor 2: <input type="number" name="n2" required><br><br>
+        Valor 3: <input type="number" name="n3" required><br><br>
+        <input type="submit" value="Ordenar">
     </form>
 
     <?php
 
-        $valor_total = $_POST['valor_total'];
+        $n1 = intval($_POST['n1']);
+        $n2 = intval($_POST['n2']);
+        $n3 = intval($_POST['n3']);
 
-        $valor_prestacao = $valor_total / 5;
+        if ($n1 > $n2) { $temp = $n1; $n1 = $n2; $n2 = $temp; }
+        if ($n1 > $n3) { $temp = $n1; $n1 = $n3; $n3 = $temp; }
+        if ($n2 > $n3) { $temp = $n2; $n2 = $n3; $n3 = $temp; }
 
-        echo "Valor total da compra: R$ " . $valor_total . "<br>";
-        echo "Você pagará em 5 prestações de R$ " . $valor_prestacao . "sem juros.";
+        echo "<h3>Valores em ordem crescente:</h3>";
+        echo "$n1 - $n2 - $n3";
 
     ?>
-
 </body>
 </html>

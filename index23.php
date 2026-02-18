@@ -2,28 +2,25 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Exercício 10 - Loja Mamão com Açúcar</title>
+    <title>Exercício 23</title>
 </head>
 <body>
-
+    <h2>Verificar Número (Regras Específicas)</h2>
     <form method="POST">
-        <label>Valor Total da Compra (R$):</label><br>
-        <input type="number" name="valor_total" required >
-        <br><br>
-
-        <input type="submit" value="Calcular Prestações">
+        Digite um número: <input type="number"name="numero" required>
+        <input type="submit" value="Verificar">
     </form>
 
-    <?php
+    <?php 
 
-        $valor_total = $_POST['valor_total'];
+        $n = floatval($_POST['numero']);
 
-        $valor_prestacao = $valor_total / 5;
-
-        echo "Valor total da compra: R$ " . $valor_total . "<br>";
-        echo "Você pagará em 5 prestações de R$ " . $valor_prestacao . "sem juros.";
-
+        if ($n > 80 || $n < 25 || $n == 40) {
+            echo "<h3>O número $n atende aos critérios da regra.</h3>";
+        } else {
+            echo "<h3>O número $n NÃO atende aos critérios.</h3>";
+        }
+    
     ?>
-
 </body>
 </html>

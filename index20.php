@@ -2,28 +2,34 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Exercício 10 - Loja Mamão com Açúcar</title>
+    <title>Exercício 20 - Cálculo de Desconto</title>
 </head>
 <body>
 
     <form method="POST">
-        <label>Valor Total da Compra (R$):</label><br>
-        <input type="number" name="valor_total" required >
-        <br><br>
-
-        <input type="submit" value="Calcular Prestações">
+        <label>Ano do Veículo:</label><br>
+        <input type="number" name="ano" required><br><br>
+        
+        <label>Valor do Veículo (R$):</label><br>
+        <input type="number" name="valor" required><br><br>
+        
+        <input type="submit" value="Calcular Desconto">
     </form>
 
     <?php
 
-        $valor_total = $_POST['valor_total'];
+        $ano = intval($_POST['ano']);
+        $valor = floatval($_POST['valor']);
 
-        $valor_prestacao = $valor_total / 5;
+        $percentual = ($ano <= 2000) ? 0.12 : 0.07;
+        
+        $desconto = $valor * $percentual;
+        $valor_final = $valor - $desconto;
 
-        echo "Valor total da compra: R$ " . $valor_total . "<br>";
-        echo "Você pagará em 5 prestações de R$ " . $valor_prestacao . "sem juros.";
-
+        echo "<h3>Resultado:</h3>";
+        echo "Desconto de " . ($percentual * 100) . "%: R$ " . $desconto . "<br>";
+        echo "Valor final a pagar: <b>R$ " . $valor_final . "</b>";
+    
     ?>
-
 </body>
 </html>

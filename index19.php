@@ -2,28 +2,38 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Exercício 10 - Loja Mamão com Açúcar</title>
+    <title>Exercício 19 - Contagem de Homens e Mulheres</title>
 </head>
 <body>
-
     <form method="POST">
-        <label>Valor Total da Compra (R$):</label><br>
-        <input type="number" name="valor_total" required >
-        <br><br>
-
-        <input type="submit" value="Calcular Prestações">
+        <p>Digite <b>Nome:M</b> ou <b>Nome:F</b> (um por linha):</p>
+        <textarea name="dados" rows="8"equired></textarea><br>
+        <button type="submit">Contabilizar</button>
     </form>
 
     <?php
+    if ($_POST) {
+        $linhas = explode("\n", $_POST['dados']);
+        $m = 0; $f = 0;
 
-        $valor_total = $_POST['valor_total'];
+        foreach ($linhas as $l) {
+            $partes = explode(':', $l);
+            
+            if (count($partes) == 2) {
+                $sexo = strtoupper(trim($partes[1]));
 
-        $valor_prestacao = $valor_total / 5;
+                // Contagem simples
+                if ($sexo == 'M') $m++;
+                if ($sexo == 'F') $f++;
+                
+                // Exibe o nome e o status usando ternário
+                $status = ($sexo == 'M') ? "Homem" : "Mulher";
+                echo "Nome: $partes[0] - $status <br>";
+            }
+        }
 
-        echo "Valor total da compra: R$ " . $valor_total . "<br>";
-        echo "Você pagará em 5 prestações de R$ " . $valor_prestacao . "sem juros.";
-
+        echo "<h3>Total: M: $m | F: $f</h3>";
+    }
     ?>
-
 </body>
 </html>

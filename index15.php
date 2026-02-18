@@ -2,28 +2,26 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Exercício 10 - Loja Mamão com Açúcar</title>
+    <title>>Exercício 15 - Verificar Intervalo</title>
 </head>
 <body>
-
+ 
     <form method="POST">
-        <label>Valor Total da Compra (R$):</label><br>
-        <input type="number" name="valor_total" required >
-        <br><br>
-
-        <input type="submit" value="Calcular Prestações">
+        <label>Digite um número:</label><br>
+        <input type="number" name="numero" required>
+        <input type="submit" value="Verificar">
     </form>
 
     <?php
+  
+        $num = floatval($_POST['numero']);
 
-        $valor_total = $_POST['valor_total'];
-
-        $valor_prestacao = $valor_total / 5;
-
-        echo "Valor total da compra: R$ " . $valor_total . "<br>";
-        echo "Você pagará em 5 prestações de R$ " . $valor_prestacao . "sem juros.";
+        if ($num >= 100 && $num <= 200) {
+            echo "<h3>O número $num está no intervalo entre 100 e 200.</h3>";
+        } else {
+            echo "<h3>O número $num NÃO está no intervalo entre 100 e 200.</h3>";
+        }
 
     ?>
-
 </body>
 </html>

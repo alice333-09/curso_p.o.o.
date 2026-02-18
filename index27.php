@@ -2,28 +2,41 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Exercício 10 - Loja Mamão com Açúcar</title>
+    <title>Exercício 27</title>
 </head>
 <body>
-
+    <h2>Carango - Desconto por Combustível</h2>
     <form method="POST">
-        <label>Valor Total da Compra (R$):</label><br>
-        <input type="number" name="valor_total" required >
-        <br><br>
-
-        <input type="submit" value="Calcular Prestações">
+        Valor do Veículo: <input type="number"  name="valor" required><br><br>
+        Combustível: 
+        <select name="combustivel">
+            <option value="alcool">Álcool</option>
+            <option value="gasolina">Gasolina</option>
+            <option value="diesel">Diesel</option>
+        </select><br><br>
+        <input type="submit" value="Calcular">
     </form>
 
     <?php
 
-        $valor_total = $_POST['valor_total'];
+        $valor = $_POST['valor'];
+        $combustivel = $_POST['combustivel'];
 
-        $valor_prestacao = $valor_total / 5;
+        if ($valor == 0) {
+            echo "<h3>Entrada encerrada.</h3>";
+        } else {
+            if ($combustivel == "alcool") $p = 0.25;
+            elseif ($combustivel == "gasolina") $p = 0.21;
+            else $p = 0.14; 
 
-        echo "Valor total da compra: R$ " . $valor_total . "<br>";
-        echo "Você pagará em 5 prestações de R$ " . $valor_prestacao . "sem juros.";
+            $desconto = $valor * $p;
+            $total = $valor - $desconto;
 
+            echo "<h3>Resumo:</h3>";
+            echo "Desconto (" . ($p*100) . "%): R$ " . $desconto . "<br>";
+            echo "Valor a pagar: R$ " . $total;
+        }
+    
     ?>
-
 </body>
 </html>

@@ -2,28 +2,41 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Exercício 10 - Loja Mamão com Açúcar</title>
+    <title>Exercício 33 - Triângulos</title>
 </head>
 <body>
 
     <form method="POST">
-        <label>Valor Total da Compra (R$):</label><br>
-        <input type="number" name="valor_total" required >
-        <br><br>
-
-        <input type="submit" value="Calcular Prestações">
+        Lado A: <input type="number" name="a" required><br><br>
+        Lado B: <input type="number" name="b" required><br><br>
+        Lado C: <input type="number" name="c" required><br><br>
+        <input type="submit" value="Verificar Tipo">
     </form>
 
     <?php
 
-        $valor_total = $_POST['valor_total'];
+        $a = intval($_POST['a']);
+        $b = intval($_POST['b']);
+        $c = intval($_POST['c']);
 
-        $valor_prestacao = $valor_total / 5;
+     
+        if ($a < ($b + $c) && $b < ($a + $c) && $c < ($a + $b)) {
+            
+            if ($a == $b && $b == $c) {
+                echo "<h3>É um Triângulo Equilátero</h3>";
+                echo "Todos os lados são iguais.";
+            } elseif ($a == $b || $a == $c || $b == $c) {
+                echo "<h3>É um Triângulo Isósceles</h3>";
+                echo "Possui dois lados iguais.";
+            } else {
+                echo "<h3>É um Triângulo Escaleno</h3>";
+                echo "Todos os lados são diferentes.";
+            }
 
-        echo "Valor total da compra: R$ " . $valor_total . "<br>";
-        echo "Você pagará em 5 prestações de R$ " . $valor_prestacao . "sem juros.";
-
+        } else {
+            echo "<h3>Os valores informados não podem formar um triângulo.</h3>";
+        }
+    
     ?>
-
 </body>
 </html>

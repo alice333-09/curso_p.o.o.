@@ -2,28 +2,38 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Exercício 10 - Loja Mamão com Açúcar</title>
+    <title>Exercício 16 - Média e Menção</title>
 </head>
 <body>
 
     <form method="POST">
-        <label>Valor Total da Compra (R$):</label><br>
-        <input type="number" name="valor_total" required >
-        <br><br>
-
-        <input type="submit" value="Calcular Prestações">
+        <input type="text" name="nome" placeholder="Nome do aluno" required><br><br>
+        <input type="number" step="0.1" name="n1" placeholder="Nota 1" required><br>
+        <input type="number" step="0.1" name="n2" placeholder="Nota 2" required><br>
+        <input type="number" step="0.1" name="n3" placeholder="Nota 3" required><br><br>
+        <input type="submit" value="Calcular Resultado">
     </form>
 
     <?php
 
-        $valor_total = $_POST['valor_total'];
+        $nome = $_POST['nome'];
+        $n1 = floatval($_POST['n1']);
+        $n2 = floatval($_POST['n2']);
+        $n3 = floatval($_POST['n3']);
+        
+        $media = ($n1 + $n2 + $n3) / 3;
 
-        $valor_prestacao = $valor_total / 5;
+        echo "<h3>Resultado do Aluno: $nome</h3>";
+        echo "Média: " . $media . "<br>";
 
-        echo "Valor total da compra: R$ " . $valor_total . "<br>";
-        echo "Você pagará em 5 prestações de R$ " . $valor_prestacao . "sem juros.";
-
+        if ($media >= 7) {
+            echo "Menção: <b>APROVADO</b>";
+        } elseif ($media <= 5) {
+            echo "Menção: <b>REPROVADO</b>";
+        } else {
+            echo "Menção: <b>RECUPERAÇÃO</b>";
+        }
+    
     ?>
-
 </body>
 </html>

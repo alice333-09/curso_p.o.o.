@@ -2,28 +2,48 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Exercício 10 - Loja Mamão com Açúcar</title>
+    <title>Exercício 32 - Operações</title>
 </head>
 <body>
 
     <form method="POST">
-        <label>Valor Total da Compra (R$):</label><br>
-        <input type="number" name="valor_total" required >
-        <br><br>
-
-        <input type="submit" value="Calcular Prestações">
+        Valor A: <input type="number" name="a" required><br><br>
+        Valor B: <input type="number" name="b" required><br><br>
+        Operador (+, -, *, /): <input type="text" name="c" maxlength="1" required><br><br>
+        <input type="submit" value="Calcular">
     </form>
 
     <?php
 
-        $valor_total = $_POST['valor_total'];
+        $a = floatval($_POST['a']);
+        $b = floatval($_POST['b']);
+        $c = $_POST['c'];
+        $resultado = null;
+        $erro = "";
 
-        $valor_prestacao = $valor_total / 5;
+        switch ($c) {
+            case '+': $resultado = $a + $b; break;
+            case '-': $resultado = $a - $b; break;
+            case '*': $resultado = $a * $b; break;
+            case '/':
+                if ($b == 0) {
+                    $erro = "Erro: Divisão por zero não permitida!";
+                } else {
+                    $resultado = $a / $b;
+                }
+                break;
+            default:
+                $erro = "Operador não definido!";
+                break;
+        }
 
-        echo "Valor total da compra: R$ " . $valor_total . "<br>";
-        echo "Você pagará em 5 prestações de R$ " . $valor_prestacao . "sem juros.";
-
+        echo "<h3>Resultado:</h3>";
+        if ($erro != "") {
+            echo "<b'>$erro</b>";
+        } else {
+            echo "$a $c $b = <b>$resultado</b>";
+        }
+    
     ?>
-
 </body>
 </html>
