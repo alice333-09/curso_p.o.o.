@@ -1,40 +1,68 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meu Primeiro Código Tailwind</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <?php 
+        // require 'calculadora.class.php'; 
+    ?>
 </head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen">
 
-  <div class="max-w-sm bg-white rounded-2xl shadow-xl overflow-hidden hover:scale-105 transition-transform duration-300">
-    
-    <div class="h-32 bg-gradient-to-r from-blue-500 to-purple-600"></div>
+<body class="bg-gray-100 flex flex-col items-center justify-center min-h-screen p-4">
 
-    <div class="p-6 text-center">
-      <div class="w-24 h-24 bg-gray-300 border-4 border-white rounded-full mx-auto -mt-16 mb-4 flex items-center justify-center text-3xl">
-        🚀
-      </div>
+    <div class="bg-white p-8 rounded-xl shadow-md w-full max-w-xs">
+        <h1 class="text-2xl font-bold text-pink-600 mb-6 text-center">Calculadora</h1>
+        
+        <form action="" method="POST" class="space-y-4">
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Primeiro número:</label>
+                <input type="number" name="n1" class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-pink-500 focus:border-pink-500 outline-none">
+            </div>
 
-      <h2 class="text-2xl font-bold text-gray-800">Dev Iniciante</h2>
-      <p class="text-gray-500 text-sm mb-4">Aprendendo Tailwind CSS e criando interfaces incríveis.</p>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Segundo número:</label>
+                <input type="number" name="n2" required class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:ring-pink-500 focus:border-pink-500 outline-none">
+            </div>
 
-      <div class="flex space-x-2 justify-center">
-        <button class="px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors">
-          Seguir
-        </button>
-        <button class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition-colors">
-          Mensagem
-        </button>
-      </div>
+            <div class="grid grid-cols-4 gap-2 pt-2">
+                <button type="submit" name="operacao" value="mais" class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 rounded-lg transition-colors">+</button>
+                <button type="submit" name="operacao" value="menos" class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 rounded-lg transition-colors">-</button>
+                <button type="submit" name="operacao" value="divi" class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 rounded-lg transition-colors">%</button>
+                <button type="submit" name="operacao" value="multi" class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 rounded-lg transition-colors">x</button>
+            </div>
+        </form>
+
+        <div class="mt-6 p-4 bg-pink-50 rounded-lg border border-pink-100">
+            <p class="text-gray-800 font-semibold text-center">
+                <?php
+                    // Verificação para evitar erro de 'undefined index' ao carregar a página pela primeira vez
+                    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                        $num1 = $_POST['n1'] ?? 0;
+                        $num2 = $_POST['n2'] ?? 0;
+                        $op = $_POST['operacao'] ?? '';
+
+                        // Supondo que sua classe esteja correta
+                        $calc = new Calculadora($num1, $num2);
+
+                        if($op == 'mais'){
+                            echo "Resultado: " . $calc->calcularSoma();
+                        } elseif ($op == 'menos'){
+                            echo "Resultado: " . $calc->calcularSubtracao();
+                        } elseif ($op == 'multi'){
+                            echo "Resultado: " . $calc->calcularMultiplicacao();
+                        } else {
+                            echo "Resultado: " . $calc->calcularDivisao();
+                        }
+                    } else {
+                        echo "Aguardando operação...";
+                    }
+                ?>
+            </p>
+        </div>
     </div>
-
-    <div class="bg-gray-50 p-4 border-t border-gray-100 flex justify-around text-sm text-gray-600">
-      <div><strong>12k</strong> Seguidores</div>
-      <div><strong>540</strong> Seguindo</div>
-    </div>
-  </div>
 
 </body>
 </html>
