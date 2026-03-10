@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculaora</title>
     <?php 
-        require 'somar.class.php';
-        require 'subtrair.class.php'; 
+        require 'calculadora.class.php';
     ?>
 </head>
 
@@ -26,19 +25,26 @@
 
     </form>
     <?php
-    $num1 = $_POST['n1'];
-    $num2 = $_POST['n2'];
-    $op = $_POST['operacao'];
+        $num1 = $_POST['n1'];
+        $num2 = $_POST['n2'];
+        $op = $_POST['operacao'];
 
-    $calcsoma = new Somar($num1, $num2);
-    $calcsub = new Subtrair($num1, $num2);
+        $calcsoma = new Calculadora($num1, $num2);
+        $calcsub = new Calculadora($num1, $num2);
+        $calcmulti = new Calculadora($num1, $num2);
+        $calcdivi = new Calculadora($num1, $num2);
 
 
-    if($op == 'mais'){
-        echo "Resultado: " . $calcsoma->calcularSoma();
-    } elseif ($op == 'menos'){
-        echo "Resultado: " . $calcsub->calcularSubtracao();
-    }
+
+        if($op == 'mais'){
+            echo "Resultado: " . $calcsoma->calcularSoma();
+        } elseif ($op == 'menos'){
+            echo "Resultado: " . $calcsub->calcularSubtracao();
+        } elseif ($op == 'multi'){
+            echo "Resultado: " . $calcmulti->calcularMultiplicacao();
+        }else{
+            echo "Resultado: " . $calcdivi->calcularDivisao();
+        }
     ?>
 </body>
 
